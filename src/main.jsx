@@ -4,6 +4,7 @@ import { createState } from "dreamland/core";
 // css
 import './css/main.css';
 import './css/gallery.css';
+import './css/toolbar.css';
 
 // js
 import './js/ui.jsx';
