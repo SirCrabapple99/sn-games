@@ -1,0 +1,91 @@
+/* top level stuff that mostly stays static */
+:root {
+  --sn-color: teal;
+  --sn-font: white;
+}
+
+body,
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+}
+
+html * {
+  font-family: 'Comic Sans MS', cursive;
+  color: var(--sn-font);
+}
+
+#logo {
+  position: absolute;
+  font-size: 2rem;
+  left: 0.5rem;
+  top: 0.5rem;
+  line-height: 2rem;
+
+  color: rgba(255, 255, 255, 0.5);
+  z-index: 2;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+/* microsoft onenter effect stuff */
+.ui {
+  position: relative;
+  --lx: -999px;
+  --ly: -999px;
+}
+
+.ui::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+
+  mask-image: radial-gradient(
+    circle 120px at var(--lx) var(--ly),
+    white,
+    transparent
+  );
+}
+
+/* hover reveal */
+.ui::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+
+  background: radial-gradient(
+    circle 60px at var(--lx) var(--ly),
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+.ui:hover::after {
+  opacity: 1;
+}
+
+/* custom elements */
+game-gallery,
+game-tilt,
+game-card,
+game-image,
+game-text,
+sn-logo,
+bottom-bar {
+  display: block;
+}

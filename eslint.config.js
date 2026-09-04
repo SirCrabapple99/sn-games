@@ -1,0 +1,1 @@
+languageOptions: { globals: { use: "readonly" } }

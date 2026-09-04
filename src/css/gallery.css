@@ -1,0 +1,74 @@
+game-gallery {
+  background-color: black;
+
+  z-index: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+
+  gap: 1rem;
+  overflow: scroll;
+
+  padding: 1rem;
+}
+
+game-gallery > * {
+  flex: 0 0 auto;
+}
+
+game-card {
+  width: inherit;
+  max-width: inherit;
+
+  aspect-ratio: inherit;
+  height: inherit;
+
+  background-color: var(--sn-color);
+
+  border-radius: inherit;
+
+  transition: transform 0.2s ease-out;
+}
+
+/* tilt effect stuff */
+game-tilt {
+  --game-width: 15rem;
+  width: min(var(--game-width), 90%);
+  aspect-ratio: 4/5;
+  border-radius: calc(var(--game-width) / 15);
+  perspective: 800px;
+}
+
+game-tilt:hover > * {
+  transform: rotateY(calc(var(--nx) * 24deg)) rotateX(calc(var(--ny) * -24deg));
+}
+
+game-image {
+  width: 100%;
+  aspect-ratio: 1;
+  height: auto;
+
+  border-radius: calc(var(--game-width) / 15) calc(var(--game-width) / 15) 0 0;
+
+  background-color: white;
+}
+
+game-text {
+  width: 100%;
+  aspect-ratio: 4;
+  height: auto;
+
+  display: grid;
+  place-content: center;
+
+  border-radius: 0 0 calc(var(--game-width) / 15) calc(var(--game-width) / 15);
+
+  /* straight from mdn but who cares at least I don't use ai */
+  box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.4),
+    inset -2px -2px 3px rgba(0, 0, 0, 0.4);
+
+  text-shadow: 1px 0 10px color-mix(in hsl, var(--sn-color) 20%, white 80%);
+
+  user-select: none;
+}
