@@ -1,0 +1,4 @@
+/* styling for mobile devices or anything without hover */
+@media (hover: none) and (pointer: coarse) {
+  /* toolbar */
+}

@@ -1,5 +1,5 @@
 game-gallery {
-  background-color: black;
+  background-color: transparent;
 
   z-index: 0;
 
@@ -8,16 +8,38 @@ game-gallery {
   align-items: flex-start;
 
   gap: 1rem;
-  overflow: scroll;
+  overflow-y: scroll;
+  scrollbar-width: none;
 
   padding: 1rem;
+  
+  height: 100vh;
 }
 
 game-gallery > * {
   flex: 0 0 auto;
+  margin: auto;
+}
+
+/* tilt effect stuff */
+game-tilt {
+  --game-width: 15rem;
+  width: min(var(--game-width), 90%);
+  aspect-ratio: 4/5;
+  border-radius: calc(var(--game-width) / 15);
+  perspective: 100rem;
+
+  display: flex;
+  flex-direction: row;
+}
+
+game-tilt:hover > * {
+  transform: rotateY(calc(var(--nx) * 24deg)) rotateX(calc(var(--ny) * -24deg));
 }
 
 game-card {
+  margin: auto;
+
   width: inherit;
   max-width: inherit;
 
@@ -29,19 +51,6 @@ game-card {
   border-radius: inherit;
 
   transition: transform 0.2s ease-out;
-}
-
-/* tilt effect stuff */
-game-tilt {
-  --game-width: 15rem;
-  width: min(var(--game-width), 90%);
-  aspect-ratio: 4/5;
-  border-radius: calc(var(--game-width) / 15);
-  perspective: 800px;
-}
-
-game-tilt:hover > * {
-  transform: rotateY(calc(var(--nx) * 24deg)) rotateX(calc(var(--ny) * -24deg));
 }
 
 game-image {
@@ -65,7 +74,8 @@ game-text {
   border-radius: 0 0 calc(var(--game-width) / 15) calc(var(--game-width) / 15);
 
   /* straight from mdn but who cares at least I don't use ai */
-  box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.4),
+  box-shadow:
+    inset 2px 2px 3px rgba(255, 255, 255, 0.4),
     inset -2px -2px 3px rgba(0, 0, 0, 0.4);
 
   text-shadow: 1px 0 10px color-mix(in hsl, var(--sn-color) 20%, white 80%);

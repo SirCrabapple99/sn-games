@@ -1,11 +1,12 @@
 /* top level stuff that mostly stays static */
 :root {
-  --sn-color: teal;
+  --sn-color: rgb(0, 114, 221);
   --sn-font: white;
 }
 
 body,
 html {
+  background-color: black;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -18,11 +19,12 @@ html {
 }
 
 html * {
-  font-family: 'Comic Sans MS', cursive;
+  font-family:
+    "Comic Sans MS", "Comic Sans", cursive, Arial, Helvetica, sans-serif;
   color: var(--sn-font);
 }
 
-#logo {
+sn-logo {
   position: absolute;
   font-size: 2rem;
   left: 0.5rem;
@@ -36,7 +38,7 @@ html * {
   user-select: none;
 }
 
-/* microsoft onenter effect stuff */
+/* fluentui reveal effect */
 .ui {
   position: relative;
   --lx: -999px;
@@ -44,7 +46,7 @@ html * {
 }
 
 .ui::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
@@ -60,7 +62,7 @@ html * {
 
 /* hover reveal */
 .ui::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
@@ -80,12 +82,6 @@ html * {
 }
 
 /* custom elements */
-game-gallery,
-game-tilt,
-game-card,
-game-image,
-game-text,
-sn-logo,
-bottom-bar {
+game-gallery *, toolbar-body * {
   display: block;
 }

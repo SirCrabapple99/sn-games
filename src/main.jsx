@@ -6,17 +6,19 @@ import './css/main.css';
 import './css/gallery.css';
 import './css/toolbar.css';
 
+// always load this one last
+import './css/mobile.css';
+
 // js
 import './js/ui.jsx';
 import { Game } from "./js/components.jsx";
 
-// define all custom elements
-[
-  'game-gallery',
-  'game-tilt',
-  'game-card',
-  'game-image',
-  'game-text',
-  'sn-logo',
-  'bottom-bar',
-].forEach((tag) => customElements.define(tag, class extends HTMLElement {}));
+// gallery
+const gallery = document.getElementsByTagName("game-gallery")[0];
+
+// add example game
+addEventListener("keydown", (e) => {
+  if (e.code === "KeyH") {
+    gallery.appendChild(<Game title="Example Game" />);
+  }
+})
