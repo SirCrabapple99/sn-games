@@ -14,7 +14,7 @@ import './js/ui.jsx';
 import { Game } from "./js/components.jsx";
 
 // gallery
-const gallery = document.getElementsByTagName("game-gallery")[0];
+const gallery = document.getElementById("gallery");
 
 // add example game
 addEventListener("keydown", (e) => {

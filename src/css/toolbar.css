@@ -1,7 +1,7 @@
-toolbar-body {
+#toolbar {
   position: fixed;
   width: max(30%, min(80%, 20rem));
-  height: max(2%, min(6%, 5rem));
+  height: max(2%, min(15%, 3rem));
 
   background-color: var(--sn-color);
 
@@ -26,7 +26,7 @@ toolbar-body {
   padding: none;
 }
 
-toolbar-search {
+#toolbar-search {
   z-index: 1;
   height: 60%;
   width: 50%;
@@ -53,21 +53,21 @@ toolbar-search {
   transition: background-color 0.1s ease-in-out;
 }
 
-toolbar-search:focus {
+#toolbar-search:focus {
   background-color: color-mix(in hsl, black 5%, var(--sn-color) 90%);
 }
 
-toolbar-body:has(toolbar-search:focus) {
+#toolbar:has(toolbar-search:focus) {
   transform: scale(1.025);
 }
 
-toolbar-search:empty::before {
+#toolbar-search:empty::before {
   content: attr(placeholder);
   color: rgba(255, 255, 255, 0.5);
   pointer-events: none;
 }
 
-toolbar-settings {
+#toolbar-settings {
   width: 80cqh;
   aspect-ratio: 1;
 
@@ -83,6 +83,6 @@ toolbar-settings {
   transition: transform 0.2s;
 }
 
-toolbar-settings:hover {
+#toolbar-settings:hover {
   transform: rotate(360deg);
 }

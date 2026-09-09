@@ -1,4 +1,4 @@
-game-gallery {
+#gallery {
   background-color: transparent;
 
   z-index: 0;
@@ -16,13 +16,13 @@ game-gallery {
   height: 100vh;
 }
 
-game-gallery > * {
+#gallery > * {
   flex: 0 0 auto;
   margin: auto;
 }
 
 /* tilt effect stuff */
-game-tilt {
+.game-tilt {
   --game-width: 15rem;
   width: min(var(--game-width), 90%);
   aspect-ratio: 4/5;
@@ -33,11 +33,11 @@ game-tilt {
   flex-direction: row;
 }
 
-game-tilt:hover > * {
+.game-tilt:hover > * {
   transform: rotateY(calc(var(--nx) * 24deg)) rotateX(calc(var(--ny) * -24deg));
 }
 
-game-card {
+.game-card {
   margin: auto;
 
   width: inherit;
@@ -53,7 +53,7 @@ game-card {
   transition: transform 0.2s ease-out;
 }
 
-game-image {
+.game-image {
   width: 100%;
   aspect-ratio: 1;
   height: auto;
@@ -63,7 +63,7 @@ game-image {
   background-color: white;
 }
 
-game-text {
+.game-text {
   width: 100%;
   aspect-ratio: 4;
   height: auto;
