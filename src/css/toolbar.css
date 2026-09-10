@@ -61,8 +61,7 @@
   transform: scale(1.025);
 }
 
-#toolbar-search:empty::before {
-  content: attr(placeholder);
+#toolbar-search::placeholder {
   color: rgba(255, 255, 255, 0.5);
   pointer-events: none;
 }
