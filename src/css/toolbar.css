@@ -1,7 +1,10 @@
 #toolbar {
   position: fixed;
-  width: max(30%, min(80%, 20rem));
-  height: max(2%, min(15%, 3rem));
+  width: 20rem;
+  max-width: 80%;
+  min-width: 20%;
+
+  height: 3rem;
 
   background-color: var(--sn-color);
 
