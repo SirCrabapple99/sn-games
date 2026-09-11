@@ -10,13 +10,14 @@ if (import.meta.env.DEV) {
 import './css/main.css';
 import './css/gallery.css';
 import './css/toolbar.css';
+import './css/player.css';
 
 // always load this one last
 import './css/compat.css';
 
 // js
 import './js/ui.jsx';
-import './js/populateGames.jsx';
+import './js/gallery.jsx';
 
 // gallery
 const gallery = document.getElementById("gallery");

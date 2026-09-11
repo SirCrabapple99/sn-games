@@ -1,3 +1,4 @@
+// this file handles loading games from sources
 import { Game } from "./components.jsx";
 const gallery = document.getElementById("gallery");
 
