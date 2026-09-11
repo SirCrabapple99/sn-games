@@ -27,7 +27,7 @@
   width: min(var(--game-width), 90%);
   aspect-ratio: 4/5;
   border-radius: calc(var(--game-width) / 15);
-  perspective: 100rem;
+  perspective: 800px;
 
   display: flex;
   flex-direction: row;

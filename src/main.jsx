@@ -7,7 +7,7 @@ import './css/gallery.css';
 import './css/toolbar.css';
 
 // always load this one last
-import './css/mobile.css';
+import './css/compat.css';
 
 // js
 import './js/ui.jsx';
