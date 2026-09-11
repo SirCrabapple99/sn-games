@@ -20,7 +20,7 @@ html {
 
 html * {
   font-family:
-    "Comic Sans MS", "Comic Sans", cursive, Arial, Helvetica, sans-serif;
+    "Comic Sans MS", "Comic Sans", Arial, Helvetica, sans-serif;
   color: var(--sn-font);
 }
 

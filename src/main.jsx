@@ -1,6 +1,11 @@
 // file to handle imports, manage states, etc.
 import { createState } from "dreamland/core";
 
+// eruda since I mostly dev on chromebook
+if (import.meta.env.DEV) {
+  import('eruda').then(eruda => eruda.default.init());
+}
+
 // css
 import './css/main.css';
 import './css/gallery.css';
