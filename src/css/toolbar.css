@@ -79,7 +79,7 @@
   background-size: 120%;
   background-position: center;
 
-  transition: transform 0.2s;
+  transition: transform 0.3s ease-in-out;
 }
 
 #toolbar-settings:hover {
