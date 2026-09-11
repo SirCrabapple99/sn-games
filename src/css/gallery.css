@@ -23,6 +23,7 @@
 
 /* tilt effect stuff */
 .game-tilt {
+  cursor: pointer;
   --game-width: 15rem;
   width: min(var(--game-width), 90%);
   aspect-ratio: 4/5;
@@ -62,6 +63,7 @@
   border-radius: calc(var(--game-width) / 15) calc(var(--game-width) / 15) 0 0;
 
   background-color: white;
+  user-select: none;
 }
 
 .game-text {

@@ -1,6 +1,9 @@
 /* styling for mobile devices or anything without hover */
 @media (hover: none) and (pointer: coarse) {
   /* toolbar */
+  #toolbar-settings:hover {
+    transform: none;
+  }
 }
 
 /* make bigger on pc */
