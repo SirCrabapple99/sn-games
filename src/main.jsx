@@ -11,7 +11,7 @@ import './css/mobile.css';
 
 // js
 import './js/ui.jsx';
-import { Game } from "./js/components.jsx";
+import './js/populateGames.jsx';
 
 // gallery
 const gallery = document.getElementById("gallery");
