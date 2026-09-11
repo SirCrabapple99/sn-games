@@ -16,7 +16,7 @@ import './css/player.css';
 import './css/compat.css';
 
 // js
-import './js/ui.jsx';
+import './js/ui.js';
 import './js/gallery.jsx';
 
 // gallery

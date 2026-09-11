@@ -1,14 +1,18 @@
 #player {
     width: 100%;
     height: 100%;
+
     position: fixed;
+    display: flex;
+    flex-direction: column-reverse;
+
     z-index: 2;
 
     background-color: var(--sn-color);
 }
 
 #player-controls {
-    position: fixed;
+    place-self: end;
     width: 100%;
     height: 4rem;
     
@@ -25,4 +29,12 @@
 #player-title {
     font-size: 200%;
     margin-left: 1%;
+}
+
+#player-frame {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    place-self: start;
+    border: 2px solid red;
 }
