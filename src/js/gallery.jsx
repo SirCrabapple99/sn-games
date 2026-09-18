@@ -1,6 +1,6 @@
 // this file handles loading games from sources
 import { Game } from "./components.jsx";
-import { loadGame } from './player.js';
+import './player.js';
 
 const gallery = document.getElementById("gallery");
 
@@ -66,14 +66,16 @@ async function clearGames() { }
 async function addGame(s, g) {
   // get base url
   const baseUrl = s._SN_INFO.baseUrl;
+  let gameJSON = g;
+  gameJSON._SN_INFO = {
+    "baseUrl": baseUrl
+  }
 
   gallery.appendChild(
     <Game
-      title={g.title}
-      cover={baseUrl + g.path + g.cover}
-      click={
-        () => { loadGame(g) }
-      }
+      title={gameJSON.title}
+      cover={baseUrl + gameJSON.path + gameJSON.cover}
+      game={gameJSON}
     />,
   );
 }

@@ -44,6 +44,7 @@ new MutationObserver((mutations) => {
       node.querySelectorAll?.(".ui").forEach(register);
 
       if (node.matches?.(".game-tilt")) rotation(node);
+      node.querySelectorAll?.(".game-tilt").forEach(register);
     }
   }
 }).observe(document.body, { childList: true, subtree: true });

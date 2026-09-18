@@ -1,18 +1,18 @@
+const player = document.getElementById("player");
 const frame = document.getElementById("player-frame");
-console.log(frame)
 
 export function showPlayer() {
-
+    player.classList.add('visible');
 }
 
 export function hidePlayer() {
-
+    player.classList.remove('visible');
 }
 
 export async function loadGame(game) {
-    console.log("a")
+
     try {
-        const data = await fetch(game.html);
+        const data = await fetch(game._SN_INFO.baseUrl + game.path + game.html);
         if (!data.ok) {
             console.error(`error loading game at url ${url}`);
             return;
@@ -33,12 +33,13 @@ export async function loadGame(game) {
             html = html.replace('<head>', '<head>' + erudaScript);
         }
 
-        if (game.baseUrl) {
-            if (html.querySelector("base")[0]) {
-                html.querySelector("base")[0].href = game.baseUrl;
-            }
-            else if (html.head) {
-                html.head.prepend(`<base href="${game.baseUrl}">`);
+        // inject base url
+        if (game._SN_INFO.baseUrl) {
+            const baseTag = `<base href="${game._SN_INFO.baseUrl + game.path}">`;
+            if (/<base\b[^>]*>/i.test(html)) {
+                html = html.replace(/<base\b[^>]*>/i, baseTag);
+            } else {
+                html = html.replace(/<head[^>]*>/i, m => m + baseTag);
             }
         }
 
