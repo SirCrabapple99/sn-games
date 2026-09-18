@@ -10,6 +10,8 @@ export function hidePlayer() {
 }
 
 export async function loadGame(game) {
+    // update player info
+    document.getElementById("player-title").innerText = game.title
 
     try {
         const data = await fetch(game._SN_INFO.baseUrl + game.path + game.html);
