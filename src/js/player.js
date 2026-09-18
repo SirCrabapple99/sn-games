@@ -9,9 +9,10 @@ export function hidePlayer() {
 
 }
 
-export async function loadGame(url) {
+export async function loadGame(game) {
+    console.log("a")
     try {
-        const data = await fetch(url);
+        const data = await fetch(game.html);
         if (!data.ok) {
             console.error(`error loading game at url ${url}`);
             return;
@@ -19,6 +20,7 @@ export async function loadGame(url) {
 
         let html = await data.text();
 
+        // add eruda
         if (import.meta.env.DEV) {
             const erudaScript = `
                 <script src="https://cdn.jsdelivr.net/npm/eruda"><\/script>
@@ -28,9 +30,18 @@ export async function loadGame(url) {
                     eruda.add(erudaIndexedDB)
                 <\/script>
             `
-            html = html.replace('<head>', '<head>' + erudaScript + `<base href="https://cdn.jsdelivr.net/gh/SirCrabapple99/sn-assets/games/cookieclicker/">`);
-
+            html = html.replace('<head>', '<head>' + erudaScript);
         }
+
+        if (game.baseUrl) {
+            if (html.querySelector("base")[0]) {
+                html.querySelector("base")[0].href = game.baseUrl;
+            }
+            else if (html.head) {
+                html.head.prepend(`<base href="${game.baseUrl}">`);
+            }
+        }
+
         frame.srcdoc = html;
     } catch (err) {
         console.error(err);

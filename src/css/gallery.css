@@ -23,7 +23,6 @@
 
 /* tilt effect stuff */
 .game-tilt {
-  cursor: pointer;
   --game-width: 15rem;
   width: min(var(--game-width), 90%);
   aspect-ratio: 4/5;
@@ -32,6 +31,10 @@
 
   display: flex;
   flex-direction: row;
+}
+
+.game-tilt, .game-tilt * {
+  cursor: pointer;
 }
 
 .game-tilt:hover > * {

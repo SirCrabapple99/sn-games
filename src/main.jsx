@@ -17,8 +17,6 @@ import './css/compat.css';
 import './js/ui.js';
 import './js/gallery.jsx';
 
-import './js/player.js';
-
 // gallery
 const gallery = document.getElementById("gallery");
 

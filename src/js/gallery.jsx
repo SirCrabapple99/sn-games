@@ -1,5 +1,7 @@
 // this file handles loading games from sources
 import { Game } from "./components.jsx";
+import { loadGame } from './player.js';
+
 const gallery = document.getElementById("gallery");
 
 let sources = [
@@ -53,12 +55,12 @@ async function fetchGames() {
         addGame(sourceJSON, g);
       }
     } catch (err) {
-        console.error(`something went wrong while loading source "${s.name}" at url ${s.url} (probably a CORS error)`);
+      console.error(`something went wrong while loading source "${s.name}" at url ${s.url} (probably a CORS error)`);
     }
   }
 }
 
-async function clearGames() {}
+async function clearGames() { }
 
 // source, game
 async function addGame(s, g) {
@@ -69,7 +71,9 @@ async function addGame(s, g) {
     <Game
       title={g.title}
       cover={baseUrl + g.path + g.cover}
-      html={baseUrl + g.path + g.html}
+      click={
+        () => { loadGame(g) }
+      }
     />,
   );
 }
