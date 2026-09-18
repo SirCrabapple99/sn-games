@@ -6,7 +6,7 @@ let sources = [
   {
     name: "main",
     url: "https://cdn.jsdelivr.net/gh/SirCrabapple99/sn-assets@latest/index.json",
-  },
+  }/* ,
   // example source
   {
     name: "example",
@@ -28,7 +28,7 @@ let sources = [
         },
       };
     },
-  },
+  }, */
 ];
 
 async function fetchGames() {
