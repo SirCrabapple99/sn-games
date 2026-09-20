@@ -18,17 +18,31 @@ frame.addEventListener("load", () => {
   );
 });
 let currentItem = null;
+let unloadTimer;
 
 export function showPlayer(item) {
+    clearTimeout(unloadTimer);
   currentItem = item;
+
+  player.style.transition = "none";
   copyBox(item);
-  player.getBoundingClientRect(); // reflow
+  player.getBoundingClientRect();
+  player.style.transition = "";
+
   player.classList.add("visible");
 }
+
 export function hidePlayer() {
+  const frame = player.querySelector("#player-frame");
+
+  copyBox(currentItem);
+  frame.classList.remove("visible");
   player.classList.remove("visible");
-  document.getElementById("player-frame").classList.remove("visible");
+
+  unloadTimer = setTimeout(() => { frame.src = "about:blank"; }, 10);
 }
+
+document.getElementById("player-close").addEventListener("click", hidePlayer);
 
 let loadId = 0;
 

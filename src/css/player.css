@@ -1,18 +1,18 @@
 #player {
+  pointer-events: none;
   position: fixed;
   display: flex;
   flex-direction: column-reverse;
   z-index: 5;
+
+  width: 0px;
+  height: 0px;
+
   background-color: var(--sn-color);
 
-  visibility: hidden;
   opacity: 0;
-  transition:
-    left 0.6s,
-    top 0.6s,
-    width 0.6s,
-    height 0.6s,
-    visibility 0s 0.6s;
+  transition: all 0.3s ease-in-out;
+
   background-color: var(--sn-color);
 }
 
@@ -23,9 +23,8 @@
   left: 0 !important;
   border-radius: 0 !important;
 
-  visibility: visible;
   opacity: 1;
-  transition: all 0.6s ease-in-out;
+  pointer-events: all;
 }
 
 #player-frame {
@@ -98,5 +97,5 @@
 }
 
 #player-close:active {
-    scale: 0.95 !important;
+  scale: 0.95 !important;
 }

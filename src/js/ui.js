@@ -109,6 +109,6 @@ export function copyBox(item, playerSelector = "#player") {
     top: r.top + "px",
     width: r.width + "px",
     height: r.height + "px",
-    borderRadius: radius,
+    borderRadius: "calc(var(--game-width) / 15)",
   });
 }
