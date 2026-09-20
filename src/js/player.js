@@ -17,11 +17,9 @@ frame.addEventListener("load", () => {
     true,
   );
 });
-let currentItem = null;
-let unloadTimer;
+let currentItem = null
 
 export function showPlayer(item) {
-    clearTimeout(unloadTimer);
   currentItem = item;
 
   player.style.transition = "none";
@@ -34,12 +32,11 @@ export function showPlayer(item) {
 
 export function hidePlayer() {
   const frame = player.querySelector("#player-frame");
+  frame.src = "about:blank";
 
   copyBox(currentItem);
   frame.classList.remove("visible");
   player.classList.remove("visible");
-
-  unloadTimer = setTimeout(() => { frame.src = "about:blank"; }, 10);
 }
 
 document.getElementById("player-close").addEventListener("click", hidePlayer);
