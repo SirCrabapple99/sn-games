@@ -23,6 +23,12 @@ html * {
   color: var(--sn-font);
 }
 
+img {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 #logo {
   position: fixed;
   font-size: 2rem;
