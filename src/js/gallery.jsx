@@ -1,6 +1,6 @@
 // this file handles loading games from sources
 import { Game } from "./components.jsx";
-import './player.js';
+import "./player.js";
 
 const gallery = document.getElementById("gallery");
 
@@ -8,7 +8,7 @@ let sources = [
   {
     name: "main",
     url: "https://cdn.jsdelivr.net/gh/SirCrabapple99/sn-assets@latest/index.json",
-  }/* ,
+  } /* ,
   // example source
   {
     name: "example",
@@ -30,7 +30,7 @@ let sources = [
         },
       };
     },
-  }, */
+  }, */,
 ];
 
 async function fetchGames() {
@@ -55,12 +55,14 @@ async function fetchGames() {
         addGame(sourceJSON, g);
       }
     } catch (err) {
-      console.error(`something went wrong while loading source "${s.name}" at url ${s.url} (probably a CORS error)`);
+      console.error(
+        `something went wrong while loading source "${s.name}" at url ${s.url} (probably a CORS error)`,
+      );
     }
   }
 }
 
-async function clearGames() { }
+async function clearGames() {}
 
 // source, game
 async function addGame(s, g) {
@@ -68,8 +70,8 @@ async function addGame(s, g) {
   const baseUrl = s._SN_INFO.baseUrl;
   let gameJSON = g;
   gameJSON._SN_INFO = {
-    "baseUrl": baseUrl
-  }
+    baseUrl: baseUrl,
+  };
 
   gallery.appendChild(
     <Game

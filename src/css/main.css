@@ -19,8 +19,7 @@ html {
 }
 
 html * {
-  font-family:
-    "Comic Sans MS", "Comic Sans", Arial, Helvetica, sans-serif;
+  font-family: "Comic Sans MS", "Comic Sans", Arial, Helvetica, sans-serif;
   color: var(--sn-font);
 }
 
@@ -82,6 +81,7 @@ html * {
 }
 
 /* custom elements */
-game-gallery *, toolbar-body * {
+game-gallery *,
+toolbar-body * {
   display: block;
 }

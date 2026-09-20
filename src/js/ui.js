@@ -1,4 +1,4 @@
-// file to add cool ui effects and give ui function
+// file to add cool ui effects
 
 /* ui effects */
 
@@ -94,4 +94,19 @@ addEventListener("pointermove", (e) => {
   });
 });
 
-/* ui interaction */
+/* player */
+export function copyBox(item, playerSelector = "#player") {
+  const r = item.getBoundingClientRect();
+  const radius = getComputedStyle(item).borderRadius;
+
+  const player = document.querySelector(playerSelector);
+
+  Object.assign(player.style, {
+    position: "fixed",
+    left: r.left + "px",
+    top: r.top + "px",
+    width: r.width + "px",
+    height: r.height + "px",
+    borderRadius: radius,
+  });
+}
