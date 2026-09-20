@@ -1,8 +1,11 @@
-/* styling for mobile devices or anything without hover */
-@media (hover: none) and (pointer: coarse) {
-  /* toolbar */
+/* hover effects only apply where they should */
+@media (hover: hover) and (pointer: fine) {
+  #player-close:hover {
+    scale: 1.05;
+  }
+
   #toolbar-settings:hover {
-    transform: none;
+    transform: rotate(360deg);
   }
 }
 

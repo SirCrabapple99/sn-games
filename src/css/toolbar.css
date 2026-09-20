@@ -83,7 +83,3 @@
 
   transition: transform 0.3s ease-in-out;
 }
-
-#toolbar-settings:hover {
-  transform: rotate(360deg);
-}
