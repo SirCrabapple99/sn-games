@@ -31,7 +31,7 @@
 
   display: flex;
   flex-direction: row;
-  transition: scale 0.2s;
+  transition: scale 0.2s ease-in-out;
 }
 
 .game-tilt,
@@ -57,11 +57,11 @@
   aspect-ratio: inherit;
   height: inherit;
 
-  background-color: var(--sn-color);
-
   border-radius: inherit;
 
+  transform-style: preserve-3d;
   transition: transform 0.2s ease-out;
+  will-change: transform;
 }
 
 .game-image {
@@ -74,6 +74,8 @@
 
   background-color: white;
   user-select: none;
+
+  background-color: var(--sn-color);
 }
 
 .game-text {
@@ -94,4 +96,6 @@
   text-shadow: 1px 0 10px color-mix(in hsl, var(--sn-color) 20%, white 80%);
 
   user-select: none;
+
+  background-color: var(--sn-color);
 }

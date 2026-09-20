@@ -83,9 +83,3 @@ async function addGame(s, g) {
 }
 
 fetchGames();
-
-addEventListener("keydown", (e) => {
-  if (e.code === "KeyJ") {
-    fetchGames();
-  }
-});

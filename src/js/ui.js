@@ -7,6 +7,7 @@ const uis = [];
 let rects = [];
 const measure = () => (rects = uis.map((el) => el.getBoundingClientRect()));
 const ro = new ResizeObserver(measure);
+const player = document.getElementById("player")
 
 // function to apply cool rotation effect thing
 function rotation(el) {
@@ -65,22 +66,18 @@ let queued = false,
 
 // as a side note I really like this effect in windows ui but now that I've implemented it
 // in my site I feel like it makes my site look vibecoded which it is NOT
-addEventListener("pointermove", (e) => {
-  if (e.pointerType !== "mouse") return;
-  mx = e.clientX;
-  my = e.clientY;
+// export this so player.js can forward iframe events into it
+export function onMove(x, y) {
+  mx = x;
+  my = y;
   if (queued) return;
 
-  // guard against spamming this function
   queued = true;
   requestAnimationFrame(() => {
     queued = false;
-    // iterate ui elements
     uis.forEach((el, i) => {
       const r = rects[i];
-      // guard
       if (!r) return;
-      // set property of x and y
       if (
         mx < r.left - 150 ||
         mx > r.right + 150 ||
@@ -92,6 +89,11 @@ addEventListener("pointermove", (e) => {
       el.style.setProperty("--ly", my - r.top + "px");
     });
   });
+}
+
+addEventListener("pointermove", (e) => {
+  if (e.pointerType !== "mouse") return;
+  onMove(e.clientX, e.clientY);
 });
 
 /* player */

@@ -1,8 +1,22 @@
 const player = document.getElementById("player");
 const frame = document.getElementById("player-frame");
 
-import { copyBox } from "./ui.js";
+import { copyBox, onMove } from "./ui.js";
 
+// ui effect stuff to make the reveal effects still work when hovering over the player frame
+frame.addEventListener("load", () => {
+  const doc = frame.contentDocument;
+  if (!doc) return;
+  doc.addEventListener(
+    "pointermove",
+    (e) => {
+      if (e.pointerType !== "mouse") return;
+      const f = frame.getBoundingClientRect();
+      onMove(e.clientX + f.left, e.clientY + f.top);
+    },
+    true,
+  );
+});
 let currentItem = null;
 
 export function showPlayer(item) {
@@ -10,14 +24,10 @@ export function showPlayer(item) {
   copyBox(item);
   player.getBoundingClientRect(); // reflow
   player.classList.add("visible");
-
-  player.style.width = "100%";
-  player.style.height = "100%";
-  player.style.left = "0";
-  player.style.top = "0";
 }
 export function hidePlayer() {
   player.classList.remove("visible");
+  document.getElementById("player-frame").classList.remove("visible");
 }
 
 let loadId = 0;
@@ -68,6 +78,7 @@ export async function loadGame(game) {
     await transition;
     if (id !== loadId) return; // superseded by a newer load
     frame.srcdoc = html;
+    document.getElementById("player-frame").classList.add("visible");
   } catch (err) {
     console.error(err);
   }
