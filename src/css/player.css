@@ -60,7 +60,7 @@
   border: none;
 
   opacity: 0;
-  filter: blur(2px);
+  filter: blur(5px);
   transition:
     opacity 0.3s ease-in-out,
     filter 0.3s ease-in-out;
@@ -69,5 +69,5 @@
 
 #player-frame.visible {
   opacity: 1;
-  filter: none;
+  filter: blur(0px);
 }
