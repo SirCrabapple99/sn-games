@@ -72,10 +72,13 @@
 
   border-radius: calc(var(--game-width) / 15) calc(var(--game-width) / 15) 0 0;
 
-  background-color: white;
   user-select: none;
 
-  background-color: var(--sn-color);
+  background-color: color-mix(
+    in hsl,
+    color-mix(in hsl, var(--sn-color) 80%, white 20%) 10%,
+    transparent 90%
+  );
 }
 
 .game-text {
