@@ -4,6 +4,10 @@
     scale: 1.05;
   }
 
+  #player-fullscreen:hover {
+    scale: 1.05;
+  }
+
   #toolbar-settings:hover {
     transform: rotate(360deg);
   }
