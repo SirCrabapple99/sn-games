@@ -31,12 +31,10 @@ export function showPlayer(item) {
 }
 
 export function hidePlayer() {
-  const frame = player.querySelector("#player-frame");
-  frame.src = "about:blank";
-
-  copyBox(currentItem);
+  // NOTE need to make this smoother
   frame.classList.remove("visible");
   player.classList.remove("visible");
+  frame.srcdoc = "about:blank";
 }
 
 document.getElementById("player-close").addEventListener("click", hidePlayer);
@@ -48,15 +46,24 @@ export async function loadGame(game) {
   document.getElementById("player-title").innerText = game.title;
   const url = game._SN_INFO.baseUrl + game.path + game.html;
 
-  const transition = new Promise((res) =>
+  // very awesome so cool transition thingy
+  const transition = new Promise((res) => {
+    const style = getComputedStyle(player);
+    const duration = parseFloat(style.transitionDuration) * 1000 || 0;
+    if (duration === 0) return res();
+
+    const timeout = setTimeout(res, duration + 50); // fallback safety margin
     player.addEventListener(
       "transitionend",
       (e) => {
-        if (e.target === player) res();
+        if (e.target === player) {
+          clearTimeout(timeout);
+          res();
+        }
       },
       { once: true },
-    ),
-  );
+    );
+  });
 
   try {
     const data = await fetch(url);
@@ -94,11 +101,3 @@ export async function loadGame(game) {
     console.error(err);
   }
 }
-
-addEventListener("keydown", (e) => {
-  if (e.code === "KeyN") {
-    loadGame(
-      "https://cdn.jsdelivr.net/gh/SirCrabapple99/sn-assets/games/cookieclicker/index.html",
-    );
-  }
-});

@@ -67,6 +67,7 @@
 #toolbar-search::placeholder {
   color: rgba(255, 255, 255, 0.5);
   pointer-events: none;
+  user-select: none;
 }
 
 #toolbar-settings {
