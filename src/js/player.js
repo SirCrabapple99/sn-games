@@ -101,3 +101,9 @@ export async function loadGame(game) {
     console.error(err);
   }
 }
+
+function fullscreenPlayer() {
+  frame.requestFullscreen();
+}
+
+document.getElementById("player-fullscreen").addEventListener("click", fullscreenPlayer);
