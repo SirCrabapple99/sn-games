@@ -6,10 +6,10 @@ import "./css/main.css";
 import "./css/gallery.css";
 import "./css/toolbar.css";
 import "./css/player.css";
+import "./css/settings.css";
 
 // always load this one last
 import "./css/compat.css";
 
 // js
-import "./js/ui.js";
 import "./js/gallery.jsx";

@@ -15,10 +15,10 @@
   <div id="player">
     <div id="player-controls" class="ui">
       <div id="player-title">Example Game</div>
-      <div id="player-fullscreen"></div>
-      <div id="player-close"></div>
+      <div id="player-fullscreen" class="ui"></div>
+      <div id="player-close" class="ui"></div>
     </div>
-    <iframe id="player-frame" title="game frame" allow="fullscreen" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>></iframe>
+    <iframe id="player-frame" title="game frame" allow="fullscreen" sandbox="allow-scripts allow-same-origin allow-forms"></iframe></iframe>
 
   </div>
   <!--  -->
@@ -28,11 +28,16 @@
   <!--  -->
   <div id="toolbar" class="ui">
     <input id="toolbar-search" contenteditable="plaintext-only" aria-label="search" placeholder="search...">
-    <div id="toolbar-settings"></div>
+    <div id="toolbar-settings" class="ui"></div>
   </div>
   <!--  -->
   <!--  -->
-  <script type="module" src="/src/main.jsx"></script>
+  <div id="settings">
+    <div id="settings-background"></div>
+  </div>
+  <!--  -->
+  <!--  -->
+  <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
