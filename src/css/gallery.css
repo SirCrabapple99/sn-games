@@ -74,6 +74,9 @@
 
   user-select: none;
 
+  object-fit: cover;
+  display: block;
+
   background-color: color-mix(
     in hsl,
     color-mix(in hsl, var(--sn-color) 80%, white 20%) 10%,

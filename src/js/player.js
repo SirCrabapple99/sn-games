@@ -21,6 +21,7 @@ let currentItem = null
 
 export function showPlayer(item) {
   currentItem = item;
+  player.style.setProperty("--background-i", `url("${item.querySelector(".game-image").src}")`);
 
   player.style.transition = "none";
   copyBox(item);
@@ -31,7 +32,12 @@ export function showPlayer(item) {
 }
 
 export function hidePlayer() {
-  // NOTE need to make this smoother
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = frame.clientWidth;
+    canvas.height = frame.clientHeight;
+  } catch {}
+
   frame.classList.remove("visible");
   player.classList.remove("visible");
   frame.srcdoc = "about:blank";
