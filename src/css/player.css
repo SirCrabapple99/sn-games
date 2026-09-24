@@ -10,9 +10,16 @@
 
   --background-i: url("");
   background-color: var(--sn-color);
+  background-image: var(--background-i);
+  background-position: center;
+  background-size: contain;
+  background-repeat: repeat-x;
 
   opacity: 0;
-  transition: all 0.3s ease-in-out;
+
+  transition-property: width, height, top, left, border-radius, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
 
   background-color: var(--sn-color);
 }
@@ -26,36 +33,6 @@
 
   opacity: 1;
   pointer-events: all;
-}
-
-#player:before,
-#player:after {
-  user-select: none;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 1;
-
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-
-  background-image: var(--background-i);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-
-  transition: opacity 0.3s ease-in-out;
-}
-
-#player:before {
-  background-size: cover;
-  filter: blur(10px);
-  transform: scale(1.1);
-}
-
-#player.visible:has(#player-frame.visible):before, #player.visible:has(#player-frame.visible):after {
-  opacity: 0;
 }
 
 #player-frame {

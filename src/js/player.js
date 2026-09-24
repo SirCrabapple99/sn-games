@@ -32,12 +32,6 @@ export function showPlayer(item) {
 }
 
 export function hidePlayer() {
-  try {
-    const canvas = document.createElement("canvas");
-    canvas.width = frame.clientWidth;
-    canvas.height = frame.clientHeight;
-  } catch {}
-
   frame.classList.remove("visible");
   player.classList.remove("visible");
   frame.srcdoc = "about:blank";
