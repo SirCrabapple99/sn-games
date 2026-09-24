@@ -8,75 +8,60 @@ let sources = [
   {
     name: "main",
     url: "https://cdn.jsdelivr.net/gh/SirCrabapple99/sn-assets@latest/index.json",
-  } /* ,
-  // example source
+  },
   {
-    name: "example",
-    url: "https://example.net/",
-    translationFunction: () => {
-      return {
-        games: [
-          {
-            title: "exampleGame",
-            path: "exampleGame/",
-            html: "example.html",
-            cover: "example.png",
-            _SN_INFO: null,
-          },
-        ],
-        _SN_INFO: {
-          baseUrl:
-            "https://cdn.jsdelivr.net/gh/SirCrabapple99/sn-assets@latest/",
-        },
-      };
-    },
-  }, */,
+    name: "test",
+    loader: () => import("./test.js"),
+    type: "js",
+  }
 ];
 
 async function fetchGames() {
   for (let s of sources) {
     try {
-      const sourceData = await fetch(s.url);
-      if (!sourceData.ok) {
-        console.error(`HTTP ${sourceData.status} loading ${s.url}`);
-        continue;
-      }
-
-      // get json
       let sourceJSON;
-      try {
-        sourceJSON = await sourceData.json();
-      } catch (parseErr) {
-        console.error(`invalid JSON from ${s.url}`, parseErr);
-        continue;
+
+      if (s?.type === "js") {
+        const module = await s.loader();
+        sourceJSON = await module.default();
+      } else {
+        const response = await fetch(s.url);
+        if (!response.ok) {
+          console.error(`HTTP ${response.status} loading ${s.url}`);
+          continue;
+        }
+        sourceJSON = await response.json();
       }
 
       for (let g of sourceJSON.games) {
-        addGame(sourceJSON, g);
+        addGame(sourceJSON._SN_INFO?.baseUrl, g);
       }
+
     } catch (err) {
       console.error(
         `something went wrong while loading source "${s.name}" at url ${s.url} (probably a CORS error)`,
+        err
       );
     }
   }
 }
 
-async function clearGames() {}
+async function clearGames() {
+
+}
 
 // source, game
-async function addGame(s, g) {
+async function addGame(b, g) {
   // get base url
-  const baseUrl = s._SN_INFO.baseUrl;
   let gameJSON = g;
   gameJSON._SN_INFO = {
-    baseUrl: baseUrl,
+    baseUrl: b,
   };
 
   gallery.appendChild(
     <Game
       title={gameJSON.title}
-      cover={baseUrl + gameJSON.path + gameJSON.cover}
+      cover={b + gameJSON.path + gameJSON.cover}
       game={gameJSON}
     />,
   );
