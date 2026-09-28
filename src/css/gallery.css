@@ -19,6 +19,8 @@
 #gallery > * {
   flex: 0 0 auto;
   margin: auto;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 220px;
 }
 
 /* tilt effect stuff */

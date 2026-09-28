@@ -1,24 +1,83 @@
-// file to add cool ui effects
+const uis = new Set();
+const tilted = new WeakSet();
 
-/* ui effects */
+let mx = -9999;
+let my = -9999;
+let queued = false;
 
-// handle ui registration so effects always are applied to all ui
-const uis = [];
-let rects = [];
-const measure = () => (rects = uis.map((el) => el.getBoundingClientRect()));
-const ro = new ResizeObserver(measure);
-const player = document.getElementById("player")
+const registered = new WeakSet();
+const visible = new Set();
+const lit = new Set();
+const R = 130;
 
-// function to apply cool rotation effect thing
+const io = new IntersectionObserver(
+  (entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) visible.add(e.target);
+      else visible.delete(e.target);
+    }
+  },
+  { rootMargin: "150px" }
+);
+
+function register(el) {
+  if (registered.has(el)) return;
+  registered.add(el);
+  io.observe(el);
+}
+
+function updateReveal() {
+  queued = false;
+
+  const hits = [];
+  for (const el of visible) {
+    const r = el.getBoundingClientRect();
+    if (mx > r.left - R && mx < r.right + R && my > r.top - R && my < r.bottom + R) {
+      hits.push([el, r]);
+    }
+  }
+
+  const next = new Set();
+  for (const [el, r] of hits) {
+    el.style.setProperty("--lx", `${mx - r.left}px`);
+    el.style.setProperty("--ly", `${my - r.top}px`);
+    next.add(el);
+  }
+
+  for (const el of lit) {
+    if (!next.has(el)) {
+      el.style.removeProperty("--lx");
+      el.style.removeProperty("--ly");
+    }
+  }
+
+  lit.clear();
+  for (const el of next) lit.add(el);
+}
+
+function queueReveal() {
+  if (queued) return;
+  queued = true;
+  requestAnimationFrame(updateReveal);
+}
+
+function track(x, y) {
+  mx = x;
+  my = y;
+  const s = document.documentElement.style;
+  s.setProperty("--mx", x + "px");
+  s.setProperty("--my", y + "px");
+  queueReveal();
+}
+
 function rotation(el) {
+  if (tilted.has(el)) return;
+  tilted.add(el);
+
   el.addEventListener("pointermove", (e) => {
-    // don't activate on touchscreens
     if (e.pointerType !== "mouse") return;
 
-    // set rotation properties
     const r = el.getBoundingClientRect();
-    el.style.setProperty("--lx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--ly", `${e.clientY - r.top}px`);
     el.style.setProperty("--nx", (e.clientX - r.left) / r.width - 0.5);
     el.style.setProperty("--ny", (e.clientY - r.top) / r.height - 0.5);
   });
@@ -28,79 +87,57 @@ function rotation(el) {
   });
 }
 
-// register function
-function register(el) {
-  if (uis.includes(el)) return;
-  uis.push(el);
-  ro.observe(el);
-  measure();
-}
-
-// watch stuff
 new MutationObserver((mutations) => {
   for (const m of mutations) {
     for (const node of m.addedNodes) {
       if (node.nodeType !== 1) continue;
+
       if (node.matches?.(".ui")) register(node);
       node.querySelectorAll?.(".ui").forEach(register);
 
       if (node.matches?.(".game-tilt")) rotation(node);
-      node.querySelectorAll?.(".game-tilt").forEach(register);
+      node.querySelectorAll?.(".game-tilt").forEach(rotation);
     }
   }
 }).observe(document.body, { childList: true, subtree: true });
 
-// register ui
-document.querySelectorAll?.(".ui").forEach(register);
-document.querySelectorAll?.(".game-tilt").forEach(rotation);
+document.querySelectorAll(".ui").forEach(register);
+document.querySelectorAll(".game-tilt").forEach(rotation);
 
-// resize stuff
-addEventListener("resize", measure);
+addEventListener("pointermove", (e) => {
+  if (e.pointerType === "mouse") track(e.clientX, e.clientY);
+});
 
-// found out today (09/04/2026) you can declare multiple variables with one let
-let queued = false,
-  mx = 0,
-  my = 0;
+document.documentElement.addEventListener("pointerleave", () => {
+  mx = my = -9999;
+  queueReveal();
+});
 
-// mouse move for fluent reveal effect
+export function forwardFrame(frame) {
+  if (!frame) return;
 
-// as a side note I really like this effect in windows ui but now that I've implemented it
-// in my site I feel like it makes my site look vibecoded which it is NOT
-// export this so player.js can forward iframe events into it
-export function onMove(x, y) {
-  mx = x;
-  my = y;
-  if (queued) return;
+  frame.addEventListener("load", () => {
+    const doc = frame.contentDocument;
+    if (!doc) return;
 
-  queued = true;
-  requestAnimationFrame(() => {
-    queued = false;
-    uis.forEach((el, i) => {
-      const r = rects[i];
-      if (!r) return;
-      if (
-        mx < r.left - 150 ||
-        mx > r.right + 150 ||
-        my < r.top - 150 ||
-        my > r.bottom + 150
-      )
-        return;
-      el.style.setProperty("--lx", mx - r.left + "px");
-      el.style.setProperty("--ly", my - r.top + "px");
-    });
+    doc.addEventListener(
+      "pointermove",
+      (e) => {
+        if (e.pointerType !== "mouse") return;
+        const r = frame.getBoundingClientRect();
+        const sx = r.width / frame.clientWidth || 1;
+        const sy = r.height / frame.clientHeight || 1;
+        track(r.left + e.clientX * sx, r.top + e.clientY * sy);
+      },
+      { capture: true }
+    );
   });
 }
 
-addEventListener("pointermove", (e) => {
-  if (e.pointerType !== "mouse") return;
-  onMove(e.clientX, e.clientY);
-});
+forwardFrame(document.getElementById("player-frame"));
 
-/* player */
 export function copyBox(item, playerSelector = "#player") {
   const r = item.getBoundingClientRect();
-  const radius = getComputedStyle(item).borderRadius;
-
   const player = document.querySelector(playerSelector);
 
   Object.assign(player.style, {

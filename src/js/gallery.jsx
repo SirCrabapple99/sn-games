@@ -33,13 +33,15 @@ async function fetchGames() {
         sourceJSON = await response.json();
       }
 
-      for (let g of sourceJSON.games) {
-        addGame(sourceJSON._SN_INFO?.baseUrl, g);
+      const frag = document.createDocumentFragment();
+      for (const g of sourceJSON.games) {
+        frag.appendChild(buildGame(sourceJSON._SN_INFO?.baseUrl ?? "", g));
       }
+      gallery.appendChild(frag);
 
     } catch (err) {
       console.error(
-        `something went wrong while loading source "${s.name}" at url ${s.url} (probably a CORS error)`,
+        `something went wrong while loading source "${s.name}"${s.url ? ` at url ${s.url}` : ""}`,
         err
       );
     }
@@ -50,21 +52,17 @@ async function clearGames() {
 
 }
 
-// source, game
-async function addGame(b, g) {
-  // get base url
-  let gameJSON = g;
-  gameJSON._SN_INFO = {
-    baseUrl: b,
-  };
+// base, game
+function buildGame(b, g) {
+  g._SN_INFO = { baseUrl: b };
 
-  gallery.appendChild(
-    <Game
-      title={gameJSON.title}
-      cover={b + gameJSON.path + gameJSON.cover}
-      game={gameJSON}
-    />,
-  );
+  const cover = /^https?:\/\//.test(g.cover)
+    ? g.cover
+    : b + g.path + g.cover;
+
+  return <Game title={g.title} cover={cover} game={g} />;
 }
 
-fetchGames();
+window.addEventListener("load", async () => {
+  fetchGames();
+});

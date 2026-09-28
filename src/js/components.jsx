@@ -15,6 +15,8 @@ export const Game = function (cx) {
     >
       <div class="game-card">
         <img
+          loading="lazy"
+          decoding="async"
           class="game-image"
           src={this.cover}
           alt="game image"
