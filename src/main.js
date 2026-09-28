@@ -9,6 +9,7 @@ import "./css/player.css";
 import "./css/settings.css";
 
 // always load this one last
+import "./js/settings.js";
 import "./css/compat.css";
 
 // js

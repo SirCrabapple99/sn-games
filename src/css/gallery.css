@@ -96,7 +96,7 @@
 
   border-radius: 0 0 calc(var(--game-width) / 15) calc(var(--game-width) / 15);
 
-  /* straight from mdn but who cares at least I don't use ai */
+  /* straight from mdn but who cares at least it's not ai */
   box-shadow:
     inset 2px 2px 3px rgba(255, 255, 255, 0.4),
     inset -2px -2px 3px rgba(0, 0, 0, 0.4);

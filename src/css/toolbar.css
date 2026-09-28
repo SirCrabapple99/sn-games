@@ -85,5 +85,9 @@
   background-size: 100%;
   background-position: 0px -0.75px;
 
-  transition: transform 0.3s ease-in-out;
+  transition: scale 0.3s ease-in-out;
+}
+
+#toolbar-settings:active {
+  scale: 0.95 !important;
 }
