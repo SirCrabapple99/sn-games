@@ -8,12 +8,12 @@ let sources = [
   {
     name: "main",
     url: "https://cdn.jsdelivr.net/gh/SirCrabapple99/sn-assets@latest/index.json",
-  },
+  }/* ,
   {
     name: "test",
     loader: () => import("./test.js"),
     type: "js",
-  }
+  } */
 ];
 
 async function fetchGames() {
