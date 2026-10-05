@@ -9,7 +9,11 @@
   }
 
   #toolbar-settings:hover {
-    transform: rotateZ(360deg);
+    scale: 1.05;
+  }
+
+  #settings-close:hover {
+    scale: 1.05;
   }
 }
 
