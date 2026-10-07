@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 test.js
+
+# ignore .plugins/
+.*

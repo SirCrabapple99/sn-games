@@ -8,11 +8,14 @@ frame.addEventListener("load", () => {
   const doc = frame.contentDocument;
   if (!doc) return;
 });
-let currentItem = null
+let currentItem = null;
 
 export function showPlayer(item) {
   currentItem = item;
-  player.style.setProperty("--background-i", `url("${item.querySelector(".game-image").src}")`);
+  player.style.setProperty(
+    "--background-i",
+    `url("${item.querySelector(".game-image").src}")`,
+  );
 
   player.style.transition = "none";
   copyBox(item);
@@ -25,7 +28,7 @@ export function showPlayer(item) {
 export function hidePlayer() {
   frame.classList.remove("visible");
   player.classList.remove("visible");
-  frame.srcdoc = "about:blank";
+  frame.src = "about:blank";
 }
 
 document.getElementById("player-close").addEventListener("click", hidePlayer);
@@ -86,7 +89,10 @@ export async function loadGame(game) {
 
     await transition;
     if (id !== loadId) return; // superseded by a newer load
-    frame.srcdoc = html;
+    const blobUrl = URL.createObjectURL(
+      new Blob([html], { type: "text/html" }),
+    );
+    frame.src = blobUrl;
     document.getElementById("player-frame").classList.add("visible");
   } catch (err) {
     console.error(err);
@@ -97,4 +103,6 @@ function fullscreenPlayer() {
   frame.requestFullscreen();
 }
 
-document.getElementById("player-fullscreen").addEventListener("click", fullscreenPlayer);
+document
+  .getElementById("player-fullscreen")
+  .addEventListener("click", fullscreenPlayer);

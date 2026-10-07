@@ -8,7 +8,17 @@ let sources = [
   {
     name: "main",
     url: "https://cdn.jsdelivr.net/gh/SirCrabapple99/sn-assets@latest/index.json",
-  }/* ,
+  },
+  {
+    name: "web-ports",
+    url: "https://cdn.jsdelivr.net/gh/SirCrabapple99/sn-ports@main/ports.json"
+  }
+  /* ,
+  {
+    name: "web-ports",
+    loader: () => import("../../.plugins/web-port-list.js"),
+    type: "js"
+  } */ /* ,
   {
     name: "test",
     loader: () => import("./test.js"),
@@ -38,27 +48,22 @@ async function fetchGames() {
         frag.appendChild(buildGame(sourceJSON._SN_INFO?.baseUrl ?? "", g));
       }
       gallery.appendChild(frag);
-
     } catch (err) {
       console.error(
         `something went wrong while loading source "${s.name}"${s.url ? ` at url ${s.url}` : ""}`,
-        err
+        err,
       );
     }
   }
 }
 
-async function clearGames() {
-
-}
+async function clearGames() {}
 
 // base, game
 function buildGame(b, g) {
   g._SN_INFO = { baseUrl: b };
 
-  const cover = /^https?:\/\//.test(g.cover)
-    ? g.cover
-    : b + g.path + g.cover;
+  const cover = /^https?:\/\//.test(g.cover) ? g.cover : b + g.path + g.cover;
 
   return <Game title={g.title} cover={cover} game={g} />;
 }
