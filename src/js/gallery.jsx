@@ -69,7 +69,8 @@ async function fetchGames() {
         let sha = null;
         if (s.fresh) sha = await resolveHead(s.fresh);
         const pin = (u) => (sha ? u.replace(/@latest\//, `@${sha}/`) : u);
-        const response = await fetch(pin(s.url));
+        let response = await fetch(pin(s.url));
+        if (!response.ok && sha) { sha = null; response = await fetch(s.url); }
         if (!response.ok) {
           console.error(`HTTP ${response.status} loading ${s.url}`);
           continue;
