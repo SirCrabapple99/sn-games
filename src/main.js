@@ -15,7 +15,7 @@ if (!self.crossOriginIsolated && self.isSecureContext && "serviceWorker" in navi
     } catch {}
     location.reload();
   };
-  navigator.serviceWorker.register("/sw.js").then((reg) => {
+  navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).then((reg) => {
     const sw = reg.installing || reg.waiting || reg.active;
     if (sw && sw.state !== "activated")
       sw.addEventListener("statechange", () => sw.state === "activated" && reloadOnce());
