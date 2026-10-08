@@ -4,5 +4,5 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   base: '/',
-  plugins: [jsxPlugin(), serveMwData/* , viteSingleFile() */],
+  plugins: [jsxPlugin() /* , viteSingleFile() */],
 });
