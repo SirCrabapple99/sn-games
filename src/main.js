@@ -2,14 +2,24 @@
 if (import.meta.env.DEV) import("eruda").then((eruda) => eruda.default.init());
 
 // cross origin isolation for multithreading bs
+try {
+  if (self.crossOriginIsolated) sessionStorage.removeItem("sw-reloads");
+} catch {}
 if (!self.crossOriginIsolated && self.isSecureContext && "serviceWorker" in navigator) {
+  const reloadOnce = () => {
+    let n = 0;
+    try {
+      n = +sessionStorage.getItem("sw-reloads") || 0;
+      if (n >= 3) return console.error("cross-origin isolation failed after reloads");
+      sessionStorage.setItem("sw-reloads", String(n + 1));
+    } catch {}
+    location.reload();
+  };
   navigator.serviceWorker.register("/sw.js").then((reg) => {
-    if (sessionStorage.getItem("sw-reloaded")) return;
-    sessionStorage.setItem("sw-reloaded", "1");
     const sw = reg.installing || reg.waiting || reg.active;
     if (sw && sw.state !== "activated")
-      sw.addEventListener("statechange", () => sw.state === "activated" && location.reload());
-    else location.reload();
+      sw.addEventListener("statechange", () => sw.state === "activated" && reloadOnce());
+    else reloadOnce();
   }).catch((e) => console.error("sw registration failed", e));
 }
 
