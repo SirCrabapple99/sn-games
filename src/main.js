@@ -36,3 +36,5 @@ import "./css/compat.css";
 
 // js
 import "./js/gallery.jsx";
+
+window.addEventListener('load', () => requestAnimationFrame(() => document.body.classList.add('loaded')));

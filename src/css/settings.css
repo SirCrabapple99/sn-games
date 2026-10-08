@@ -2,7 +2,8 @@
     position: fixed;
     z-index: 4;
 
-    visibility: collapse;
+    user-select: none;
+    pointer-events: none;
     opacity: 0;
 
     width: 100%;
@@ -11,12 +12,11 @@
     backdrop-filter: blur(1.5px);
 
     display: flex;
-
-    transition: opacity 0.2s ease-in-out;
 }
 
 #settings.visible {
-    visibility: visible;
+    user-select: auto;
+    pointer-events: all;
     opacity: 1;
 }
 
@@ -104,3 +104,5 @@
     line-height: 1rem;
     font-size: 1rem;
 }
+
+body.loaded #settings { transition: opacity 0.2s ease-in-out; }
