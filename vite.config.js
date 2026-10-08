@@ -3,6 +3,6 @@ import { jsxPlugin } from 'dreamland/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/',
+  base: '/sn-games/',
   plugins: [jsxPlugin() /* , viteSingleFile() */],
 });
