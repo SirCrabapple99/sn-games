@@ -103,22 +103,6 @@ function fullscreenPlayer() {
   frame.requestFullscreen({ keyboardLock: "browser" });
 }
 
-// fullscreenamonturo
-const supportsKeyboardLock =
-  "keyboard" in navigator && "lock" in navigator.keyboard;
-
-if (supportsKeyboardLock) {
-  document.addEventListener("fullscreenchange", async () => {
-    if (document.fullscreenElement) {
-      await navigator.keyboard.lock(["Escape"]);
-      console.log("Keyboard locked. Hold Escape to exit.");
-    } else {
-      navigator.keyboard.unlock();
-      console.log("Keyboard unlocked.");
-    }
-  });
-}
-
 document
   .getElementById("player-fullscreen")
   .addEventListener("click", fullscreenPlayer);
