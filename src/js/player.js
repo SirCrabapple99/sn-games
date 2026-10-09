@@ -100,7 +100,23 @@ export async function loadGame(game) {
 }
 
 function fullscreenPlayer() {
-  frame.requestFullscreen();
+  frame.requestFullscreen({ keyboardLock: "browser" });
+}
+
+// fullscreenamonturo
+const supportsKeyboardLock =
+  "keyboard" in navigator && "lock" in navigator.keyboard;
+
+if (supportsKeyboardLock) {
+  document.addEventListener("fullscreenchange", async () => {
+    if (document.fullscreenElement) {
+      await navigator.keyboard.lock(["Escape"]);
+      console.log("Keyboard locked. Hold Escape to exit.");
+    } else {
+      navigator.keyboard.unlock();
+      console.log("Keyboard unlocked.");
+    }
+  });
 }
 
 document
