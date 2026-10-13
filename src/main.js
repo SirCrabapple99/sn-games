@@ -29,6 +29,7 @@ import "./css/gallery.css";
 import "./css/toolbar.css";
 import "./css/player.css";
 import "./css/settings.css";
+import "./css/saves.css";
 
 // always load this one last
 import "./js/settings.js";

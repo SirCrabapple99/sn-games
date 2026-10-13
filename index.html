@@ -28,8 +28,19 @@
     </div>
     <iframe id="player-frame" title="game frame" allow="fullscreen; autoplay; gamepad; cross-origin-isolated"
       sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock"></iframe>
-
   </div>
+
+  <div id="savedata">
+    <div id="savedata-background">
+      <div id="savedata-header">
+        <div id="savedata-title">Save Data</div>
+        <div id="savedata-close" class="ui uioverride" onclick="document.getElementById('savedata').classList.toggle('visible'); document.documentElement.style.setProperty('--ui-thing-visiblity', 1);">
+        </div>
+      </div>
+      <div id="savedata-sources">Sources</div>
+    </div>
+  </div>
+
   <!--  -->
   <!--  -->
   <div id="gallery"></div>
@@ -45,7 +56,7 @@
     <div id="settings-background">
       <div id="settings-header">
         <div id="settings-title">Settings</div>
-        <div id="settings-close" class="ui" onclick="document.getElementById('settings').classList.toggle('visible')">
+        <div id="settings-close" class="ui uioverride" onclick="document.getElementById('settings').classList.toggle('visible'); document.documentElement.style.setProperty('--ui-thing-visiblity', 1);">
         </div>
       </div>
       <div id="settings-sources">Sources</div>

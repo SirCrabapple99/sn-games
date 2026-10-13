@@ -2,6 +2,7 @@
 :root {
   --sn-color: rgb(0, 82, 160);
   --sn-font: white;
+  --ui-thing-visiblity: visible;
 }
 
 body,
@@ -85,6 +86,14 @@ img {
 
 .ui:hover::after {
   opacity: 1;
+}
+
+.ui::before {
+  opacity: var(--ui-thing-visiblity);
+}
+
+.uioverride.ui::before, .uioverride.ui::after {
+  opacity: 1 !important;
 }
 
 /* custom elements */

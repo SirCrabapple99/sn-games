@@ -1,3 +1,4 @@
+const savedata = document.getElementById("savedata");
 const player = document.getElementById("player");
 const frame = document.getElementById("player-frame");
 
@@ -11,6 +12,8 @@ frame.addEventListener("load", () => {
 let currentItem = null;
 
 export function showPlayer(item) {
+  savedata.classList.remove("visible");
+  document.documentElement.style.setProperty("--ui-thing-visiblity", 1);
   currentItem = item;
   player.style.setProperty(
     "--background-i",
@@ -26,6 +29,8 @@ export function showPlayer(item) {
 }
 
 export function hidePlayer() {
+  document.documentElement.style.setProperty("--ui-thing-visiblity", 1);
+  savedata.classList.remove("visible");
   frame.classList.remove("visible");
   player.classList.remove("visible");
   frame.src = "about:blank";
@@ -106,3 +111,10 @@ function fullscreenPlayer() {
 document
   .getElementById("player-fullscreen")
   .addEventListener("click", fullscreenPlayer);
+
+// savedata stuff
+document.getElementById("player-savedata").addEventListener("click", () => {
+  savedata.classList.add("visible");
+  document.documentElement.style.setProperty("--ui-thing-visiblity", 0);
+});
+
