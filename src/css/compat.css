@@ -26,8 +26,16 @@
 html {
   font-size: 16px;
 }
+
 @media (min-width: 1200px) {
   html {
     font-size: 20px;
+  }
+}
+
+/* hide gradient on phone */
+@media screen and (height <= 480px) {
+  #gradient-top, #gradient-bottom {
+    visibility: collapse;
   }
 }
