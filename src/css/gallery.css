@@ -36,6 +36,10 @@
   transition: scale 0.2s ease-in-out;
 }
 
+.game-tilt.hidden {
+  display: none !important;
+}
+
 .game-tilt,
 .game-tilt * {
   cursor: pointer;

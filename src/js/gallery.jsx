@@ -1,4 +1,5 @@
 // this file handles loading games from sources
+import Fuse from 'fuse.js';
 import { Game } from "./components.jsx";
 import { loadGame, showPlayer } from "./player.js";
 
@@ -57,7 +58,7 @@ async function resolveHead({ owner, repo, branch }) {
   }
 }
 
-const loadedGames = new Map();
+export const loadedGames = new Map();
 
 async function fetchGames() {
   for (const s of sources) {
@@ -98,8 +99,23 @@ async function fetchGames() {
       );
     }
   }
+  const entries = [...loadedGames.values()];
+  const fuse = new Fuse(entries, {
+    keys: ["game.title"],
+    threshold: 0.4,
+    ignoreLocation: true
+  });
 
-  console.log([...loadedGames.entries()]);
+  const searchInput = document.getElementById("toolbar-search");
+  searchInput.addEventListener("input", () => {
+    const q = searchInput.value.trim();
+    if (!q) {
+      for (const v of entries) v.el.classList.remove('hidden');
+      return;
+    }
+    const hits = new Set(fuse.search(q).map(r => r.item.el));
+    for (const v of entries) if (!hits.has(v.el)) v.el.classList.add('hidden');
+  });
 
   // open the game named in the URL, if any
   const params = new URLSearchParams(window.location.search);
