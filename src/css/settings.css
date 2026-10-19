@@ -28,14 +28,14 @@
     border-radius: 1rem;
 
     margin: auto;
-    padding: 1cqw;
+    padding: 1cqw 1.5cqw;
+    gap: 1cqw;
+    box-sizing: border-box;
 
     background-color: color-mix(black 20%, var(--sn-color) 80%);
 
     display: flex;
     flex-direction: column;
-    gap: 1cqw;
-
     box-shadow:
         inset 2px 2px 3px rgba(255, 255, 255, 0.4),
         inset -2px -2px 3px rgba(0, 0, 0, 0.4);
@@ -56,7 +56,7 @@
     text-align: center;
     place-self: center;
 
-    line-height: 2rem;
+    line-height: 2.5rem;
     display: inline-block;
 }
 
