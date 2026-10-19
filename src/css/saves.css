@@ -14,6 +14,10 @@
     display: flex;
 }
 
+#savedata * {
+    user-select: none;
+}
+
 #savedata.visible {
     user-select: auto;
     pointer-events: all;
@@ -28,13 +32,14 @@
     border-radius: 1rem;
 
     margin: auto;
-    padding: 1cqw;
+    padding: 2%;
+    gap: 1cqw;
+    box-sizing: border-box;
 
     background-color: color-mix(black 20%, var(--sn-color) 80%);
 
     display: flex;
     flex-direction: column;
-    gap: 1cqw;
 
     box-shadow:
         inset 2px 2px 3px rgba(255, 255, 255, 0.4),
@@ -54,7 +59,7 @@
     text-align: center;
     place-self: center;
 
-    line-height: 2rem;
+    line-height: 2.5rem;
     display: inline-block;
     text-shadow:
         3px 2px 3px rgba(0, 0, 0, 0.3);
@@ -84,12 +89,22 @@
     scale: 0.95 !important;
 }
 
-#savedata-upload, #savedata-download {
-    width: 40%;
+#savedata-controls {
+    width: 100%;
     height: 10%;
+    display: flex;
+    flex-direction: row;
+    gap: 1cqw;
+    place-content: center;
+}
+
+#savedata-upload, #savedata-download {
+    width: 100%;
+    height: 100%;
     place-content: center;
     text-align: center;
 
+    transition: scale 0.1s ease-in-out, filter 0.1s;
     background-color: var(--sn-color);
 
     border-radius: 1rem;
@@ -108,6 +123,10 @@
     line-height: 1rem;
     font-size: 1rem;
     display: inline-block;
+}
+
+#savedata-upload:active, #savedata-download:active {
+    scale: 0.975;
 }
 
 body.loaded #savedata { transition: opacity 0.2s ease-in-out; }

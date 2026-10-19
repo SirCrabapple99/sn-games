@@ -36,11 +36,14 @@
     <div id="savedata-background">
       <div id="savedata-header">
         <div id="savedata-title">Save Data</div>
-        <div id="savedata-close" class="ui uioverride" onclick="document.getElementById('savedata').classList.toggle('visible'); document.documentElement.style.setProperty('--ui-thing-visiblity', 1);">
+        <div id="savedata-close" class="ui uioverride"
+          onclick="document.getElementById('savedata').classList.toggle('visible'); document.documentElement.style.setProperty('--ui-thing-visiblity', 1);">
         </div>
       </div>
-      <div id="savedata-download">Upload Data</div>
-      <div id="savedata-upload">Download Data</div>
+      <div id="savedata-controls">
+        <div id="savedata-download" class="ui">Upload Data</div>
+        <div id="savedata-upload" class="ui">Download Data</div>
+      </div>
     </div>
   </div>
 
@@ -59,7 +62,8 @@
     <div id="settings-background">
       <div id="settings-header">
         <div id="settings-title">Settings</div>
-        <div id="settings-close" class="ui uioverride" onclick="document.getElementById('settings').classList.toggle('visible'); document.documentElement.style.setProperty('--ui-thing-visiblity', 1);">
+        <div id="settings-close" class="ui uioverride"
+          onclick="document.getElementById('settings').classList.toggle('visible'); document.documentElement.style.setProperty('--ui-thing-visiblity', 1);">
         </div>
       </div>
       <div id="settings-sources">Sources</div>
