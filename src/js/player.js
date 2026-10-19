@@ -29,6 +29,11 @@ export function showPlayer(item) {
 }
 
 export function hidePlayer() {
+  const searchUrl = new URL(window.location.href);
+  searchUrl.searchParams.delete("game");
+  searchUrl.searchParams.delete("source");
+  history.replaceState(null, "", searchUrl.href);
+
   document.documentElement.style.setProperty("--ui-thing-visiblity", 1);
   savedata.classList.remove("visible");
   frame.classList.remove("visible");
@@ -44,6 +49,10 @@ export async function loadGame(game) {
   const id = ++loadId;
   document.getElementById("player-title").innerText = game.title;
   const url = game._SN_INFO.baseUrl + game.path + game.html;
+  const searchUrl = new URL(window.location.href);
+  searchUrl.searchParams.set("game", game.title);
+  searchUrl.searchParams.set("source", game.source);
+  history.replaceState(null, "", searchUrl.href);
 
   // very awesome so cool transition thingy
   const transition = new Promise((res) => {

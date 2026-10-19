@@ -1,10 +1,10 @@
 // this file handles loading games from sources
 import { Game } from "./components.jsx";
-import "./player.js";
+import { loadGame, showPlayer } from "./player.js";
 
 const gallery = document.getElementById("gallery");
 
-let sources = [
+const sources = [
   // using fresh on this source is kind of a horrible idea since the image cache will add up but who cares
   {
     name: "main",
@@ -39,7 +39,7 @@ async function resolveHead({ owner, repo, branch }) {
   try {
     const cached = JSON.parse(sessionStorage.getItem(key));
     if (cached && Date.now() - cached.t < 60_000) return cached.sha;
-  } catch {}
+  } catch { }
   try {
     const r = await fetch(
       `https://api.github.com/repos/${owner}/${repo}/commits/${branch}`,
@@ -50,15 +50,17 @@ async function resolveHead({ owner, repo, branch }) {
     if (!/^[0-9a-f]{40}$/.test(sha)) return null;
     try {
       sessionStorage.setItem(key, JSON.stringify({ sha, t: Date.now() }));
-    } catch {}
+    } catch { }
     return sha;
   } catch {
     return null;
   }
 }
 
+const loadedGames = new Map();
+
 async function fetchGames() {
-  for (let s of sources) {
+  for (const s of sources) {
     try {
       let sourceJSON;
 
@@ -82,8 +84,12 @@ async function fetchGames() {
 
       const frag = document.createDocumentFragment();
       for (const g of sourceJSON.games) {
-        frag.appendChild(buildGame(sourceJSON._SN_INFO?.baseUrl ?? "", g));
+        g.source = s.name;
+        const el = buildGame(sourceJSON._SN_INFO?.baseUrl ?? "", g);
+        frag.appendChild(el);
+        loadedGames.set(JSON.stringify([g.title, s.name]), { game: g, source: sourceJSON, el });
       }
+
       gallery.appendChild(frag);
     } catch (err) {
       console.error(
@@ -92,9 +98,30 @@ async function fetchGames() {
       );
     }
   }
+
+  console.log([...loadedGames.entries()]);
+
+  // open the game named in the URL, if any
+  const params = new URLSearchParams(window.location.search);
+  const wanted = params.get("game");
+  const wantedSource = params.get("source");
+
+  if (wanted) {
+    const entry = [...loadedGames.values()].find(
+      v => v.game.title === wanted && (!wantedSource || v.game.source === wantedSource)
+    );
+    if (entry) {
+      try {
+        showPlayer(entry.el);
+        loadGame(entry.game);
+      } catch (err) {
+        console.error("restoring game from URL failed", err);
+      }
+    }
+  }
 }
 
-async function clearGames() {}
+async function clearGames() { }
 
 // base, game
 function buildGame(b, g) {
