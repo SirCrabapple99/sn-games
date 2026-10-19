@@ -25,15 +25,20 @@
     max-width: 100%;
     aspect-ratio: 4 / 3;
 
+    border-radius: 1rem;
+
     margin: auto;
     padding: 1cqw;
 
     background-color: color-mix(black 20%, var(--sn-color) 80%);
-    border: 2px solid var(--sn-color);
 
     display: flex;
     flex-direction: column;
     gap: 1cqw;
+
+    box-shadow:
+        inset 2px 2px 3px rgba(255, 255, 255, 0.4),
+        inset -2px -2px 3px rgba(0, 0, 0, 0.4);
 }
 
 #settings-header {
@@ -59,6 +64,7 @@
     flex: none;
     place-self: end;
 
+    border-radius: 0.2rem;
     height: 2.5rem;
     aspect-ratio: 1;
 
@@ -67,13 +73,8 @@
     background-size: 75%;
     background-position: center;
 
-    background-color: var(--sn-color);
-
+    background-color: transparent;
     transition: scale 0.15s ease-in-out;
-
-    box-shadow:
-        inset 2px 2px 3px rgba(255, 255, 255, 0.4),
-        inset -2px -2px 3px rgba(0, 0, 0, 0.4);
 }
 
 #settings-close:active {

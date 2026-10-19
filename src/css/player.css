@@ -119,6 +119,7 @@
   background-size: 75%;
   background-position: center;
 
+  border-radius: 0.2rem;
   background-color: var(--sn-color);
 
   transition: scale 0.15s ease-in-out;
@@ -139,6 +140,7 @@
   background-size: 75%;
   background-position: center;
 
+  border-radius: 0.2rem;
   background-color: var(--sn-color);
 
   transition: scale 0.15s ease-in-out;
@@ -159,6 +161,7 @@
   background-size: 75%;
   background-position: center;
 
+  border-radius: 0.2rem;
   background-color: var(--sn-color);
 
   transition: scale 0.15s ease-in-out;
