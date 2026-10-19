@@ -120,7 +120,7 @@
   background-position: center;
 
   border-radius: 0.2rem;
-  background-color: var(--sn-color);
+  background-color: transparent;
 
   transition: scale 0.15s ease-in-out;
 }
@@ -141,7 +141,7 @@
   background-position: center;
 
   border-radius: 0.2rem;
-  background-color: var(--sn-color);
+  background-color: transparent;
 
   transition: scale 0.15s ease-in-out;
 }
@@ -162,7 +162,7 @@
   background-position: center;
 
   border-radius: 0.2rem;
-  background-color: var(--sn-color);
+  background-color: transparent;
 
   transition: scale 0.15s ease-in-out;
 }

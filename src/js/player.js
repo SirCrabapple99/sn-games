@@ -33,6 +33,7 @@ export function hidePlayer() {
   searchUrl.searchParams.delete("game");
   searchUrl.searchParams.delete("source");
   history.replaceState(null, "", searchUrl.href);
+  document.title = "sn-games";
 
   document.documentElement.style.setProperty("--ui-thing-visiblity", 1);
   savedata.classList.remove("visible");
@@ -50,6 +51,7 @@ export async function loadGame(game) {
   document.getElementById("player-title").innerText = game.title;
   const url = game._SN_INFO.baseUrl + game.path + game.html;
   const searchUrl = new URL(window.location.href);
+  document.title = game.title;
   searchUrl.searchParams.set("game", game.title);
   searchUrl.searchParams.set("source", game.source);
   history.replaceState(null, "", searchUrl.href);

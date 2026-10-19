@@ -56,6 +56,8 @@
 
     line-height: 2rem;
     display: inline-block;
+    text-shadow:
+        3px 2px 3px rgba(0, 0, 0, 0.3);
 }
 
 #savedata-close {
