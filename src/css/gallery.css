@@ -107,7 +107,7 @@
     inset 2px 2px 3px rgba(255, 255, 255, 0.4),
     inset -2px -2px 3px rgba(0, 0, 0, 0.4);
 
-  text-shadow: 1px 0 10px color-mix(in hsl, var(--sn-color) 20%, white 80%);
+  text-shadow: 0 0 10px color-mix(in hsl, var(--sn-color) 20%, white 80%);
 
   user-select: none;
 

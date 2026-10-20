@@ -14,6 +14,10 @@
     display: flex;
 }
 
+#settings * {
+    user-select: none;
+}
+
 #settings.visible {
     user-select: auto;
     pointer-events: all;
@@ -96,7 +100,7 @@
     box-shadow:
         inset 2px 2px 3px rgba(255, 255, 255, 0.4),
         inset -2px -2px 3px rgba(0, 0, 0, 0.4);
-        
+
     text-shadow:
         3px 2px 3px rgba(0, 0, 0, 0.3);
 
@@ -108,8 +112,40 @@
     font-size: 1.1rem;
 }
 
-body.loaded #settings { transition: opacity 0.2s ease-in-out; }
+body.loaded #settings {
+    transition: opacity 0.2s ease-in-out;
+}
+
+@property --hue {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
+}
+
+@keyframes rainbow {
+    to { --hue: 360; }
+}
 
 #settings-colorpicker {
+    width: 100%;
+    text-align: center;
+    height: 2rem;
+
+    line-height: 2rem;
+    background-color: var(--sn-color);
+
+    --hue: 0;
+    --rainbow: oklch(0.72 0.17 var(--hue));
+    animation: rainbow 6s linear infinite;
+
+    box-shadow:
+        inset 2px 2px 3px rgb(255 255 255 / 0.4),
+        inset -2px -2px 3px rgb(0 0 0 / 0.4);
+    border-radius: 99999rem;
     
+    font-size: 1.1rem;
+    color: white;
+
+    text-shadow: 0 0 10px var(--rainbow);
+
 }

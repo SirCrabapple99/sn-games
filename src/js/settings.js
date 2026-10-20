@@ -5,7 +5,10 @@ const defaults = Object.freeze({
     "sources": []
 });
 
-const picker = document.getElementById("settings-colorpicker");
+const picker = document.getElementById("settings-colorpicker-real");
+document.getElementById("settings-colorpicker").addEventListener("click", () => {
+    picker.showPicker();
+})
 
 function loadStorage() {
     try {

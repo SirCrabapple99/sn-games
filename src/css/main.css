@@ -39,7 +39,7 @@ img {
   z-index: 3;
 
   color: var(--sn-font);
-  text-shadow: 1px 0 10px color-mix(in hsl, var(--sn-color) 20%, white 80%);
+  text-shadow: 0 0 10px color-mix(in hsl, var(--sn-color) 20%, white 80%);
 
   pointer-events: none;
   user-select: none;
